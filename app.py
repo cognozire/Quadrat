@@ -22,7 +22,7 @@ def create_service_account_file():
 service_account_path = create_service_account_file()
 # Function to fetch user credentials from the Google Sheet
 def fetch_credentials_from_sheet():
-    gc = gspread.service_account(filename=service_account_path)
+    gc = gspread.service_account(filename="gen-lang-client-0005993197-d5f052342013.json")
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet("Main")
 
