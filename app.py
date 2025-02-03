@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import google.generativeai as genai
 import os
-gemini_key = os.environ["Gemini_KEY]
+gemini_key = os.getenv("Gemini_KEY)
 genai.configure(api_key=str(gemini_key))
 
 def create_service_account_file():
