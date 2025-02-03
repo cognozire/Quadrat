@@ -25,7 +25,7 @@ def create_service_account_file():
 
 service_account_path = create_service_account_file()
 def fetch_credentials_from_sheet():
-    gc = gspread.service_account_from_dict(secret_content)
+    gc = gspread.service_account_from_dict(service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet("Main")
 
@@ -35,7 +35,7 @@ def fetch_credentials_from_sheet():
 
 # Function to add a new user to the Google Sheet
 def add_user_to_sheet(username, password):
-    gc = gspread.service_account_from_dict(secret_content)
+    gc = gspread.service_account_from_dict(service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet("Main")
 
@@ -55,7 +55,7 @@ def authenticate(username, password):
 
 # Function to save test results with incrementing test number
 def save_test_results(username, test_no, responses, score):
-    gc = gspread.service_account_from_dict(secret_content)
+    gc = gspread.service_account_from_dict(service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet(username)
 
@@ -63,7 +63,7 @@ def save_test_results(username, test_no, responses, score):
 
 # Function to fetch test history for a user
 def fetch_test_history(username):
-    gc = gspread.service_account_from_dict(secret_content)
+    gc = gspread.service_account_from_dict(service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet(username)
 
@@ -263,7 +263,7 @@ def progress_page():
 
                         # Update the Google Sheet with the feedback
                         import gspread
-                        gc = gspread.service_account_from_dict(secret_content)
+                        gc = gspread.service_account_from_dict(service_account_path)
                         sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
                         worksheet = sh.worksheet(username)
                         
