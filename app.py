@@ -5,11 +5,24 @@ import random
 import pandas as pd
 import matplotlib.pyplot as plt
 import google.generativeai as genai
-genai.configure(api_key="ABCD")
+import os
+gemini_key = os.environ["Gemini_KEY]
+genai.configure(api_key=str(gemini_key))
 
+def create_service_account_file():
+    secret_content = os.getenv("GCP_SERVICE_ACCOUNT")
+    if secret_content:
+        with open("service_account.json", "w") as f:
+            f.write(secret_content)
+        return "service_account.json"
+    else:
+        st.error("GCP_SERVICE_ACCOUNT secret is missing!")
+        return None
+
+service_account_path = create_service_account_file()
 # Function to fetch user credentials from the Google Sheet
 def fetch_credentials_from_sheet():
-    gc = gspread.service_account(filename='gen-lang-client-0005993197-d5f052342013.json')
+    gc = gspread.service_account(filename=service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet("Main")
 
