@@ -17,7 +17,7 @@ def create_service_account_file():
     secret_content = json.loads(secret_content)
     if secret_content:
         with open("service_account.json", "w") as f:
-            f.write(secret_content)
+            f.write(str(secret_content))
         return "service_account.json"
     else:
         st.error("GCP_SERVICE_ACCOUNT secret is missing!")
