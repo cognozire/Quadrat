@@ -12,7 +12,9 @@ genai.configure(api_key=str(gemini_key))
 
 
 def create_service_account_file():
-    secret_content = json.loads(st.secrets["GCP_SERVICE_ACCOUNT"])
+    secret_content = st.secrets["GCP_SERVICE_ACCOUNT"]
+    secret_content = secret_content.replace("\n", "\\n")
+    secret_content = json.loads(secret_content)
     if secret_content:
         with open("service_account.json", "w") as f:
             f.write(secret_content)
