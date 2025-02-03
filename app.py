@@ -16,7 +16,7 @@ def create_service_account_file():
     secret_content = secret_content.replace("\n", "\\n")
 
     secret_content = json.loads(secret_content)
-     gc = gspread.service_account_from_dict(service_account_info)
+    gc = gspread.service_account_from_dict(service_account_info)
     if secret_content:
         return secret_content
     else:
