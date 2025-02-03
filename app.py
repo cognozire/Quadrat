@@ -25,7 +25,7 @@ def create_service_account_file():
 
 service_account_path = create_service_account_file()
 def fetch_credentials_from_sheet():
-    gc = gspread.service_account(filename=service_account_path)
+    gc = gspread.service_account_from_dict(service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet("Main")
 
