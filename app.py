@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import google.generativeai as genai
 import os
-gemini_key = os.getenv("GEMINI_KEY")
+gemini_key = st.secrets["GEMINI_KEY"]
 genai.configure(api_key=str(gemini_key))
 # Function to fetch user credentials from the Google Sheet
 def fetch_credentials_from_sheet():
