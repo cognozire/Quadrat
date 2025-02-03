@@ -9,8 +9,21 @@ import os
 gemini_key = st.secrets["GEMINI_KEY"]
 genai.configure(api_key=str(gemini_key))
 # Function to fetch user credentials from the Google Sheet
+
+
+def create_service_account_file():
+    secret_content = os.getenv("GCP_SERVICE_ACCOUNT")
+    if secret_content:
+        with open("service_account.json", "w") as f:
+            f.write(secret_content)
+        return "service_account.json"
+    else:
+        st.error("GCP_SERVICE_ACCOUNT secret is missing!")
+        return None
+
+service_account_path = create_service_account_file()
 def fetch_credentials_from_sheet():
-    gc = gspread.service_account(filename="gen-lang-client-0005993197-d5f052342013.json")
+    gc = gspread.service_account(filename=service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet("Main")
 
@@ -20,7 +33,7 @@ def fetch_credentials_from_sheet():
 
 # Function to add a new user to the Google Sheet
 def add_user_to_sheet(username, password):
-    gc = gspread.service_account(filename='gen-lang-client-0005993197-d5f052342013.json')
+    gc = gspread.service_account(filename=service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet("Main")
 
@@ -40,7 +53,7 @@ def authenticate(username, password):
 
 # Function to save test results with incrementing test number
 def save_test_results(username, test_no, responses, score):
-    gc = gspread.service_account(filename='gen-lang-client-0005993197-d5f052342013.json')
+    gc = gspread.service_account(filename=service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet(username)
 
@@ -48,7 +61,7 @@ def save_test_results(username, test_no, responses, score):
 
 # Function to fetch test history for a user
 def fetch_test_history(username):
-    gc = gspread.service_account(filename='gen-lang-client-0005993197-d5f052342013.json')
+    gc = gspread.service_account(filename=service_account_path)
     sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
     worksheet = sh.worksheet(username)
 
@@ -248,7 +261,7 @@ def progress_page():
 
                         # Update the Google Sheet with the feedback
                         import gspread
-                        gc = gspread.service_account(filename='gen-lang-client-0005993197-d5f052342013.json')
+                        gc = gspread.service_account(filename=service_account_path)
                         sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
                         worksheet = sh.worksheet(username)
                         
