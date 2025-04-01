@@ -64,7 +64,7 @@ def save_test_results(username, test_no, responses, score):
 # Function to fetch test history for a user
 def fetch_test_history(username):
     gc = gspread.service_account_from_dict(service_account_path)
-    sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
+    sh = gc.open_by_key("IN Credentials.txt")
     worksheet = sh.worksheet(username)
 
     records = worksheet.get_all_records()
@@ -264,7 +264,7 @@ def progress_page():
                         # Update the Google Sheet with the feedback
                         import gspread
                         gc = gspread.service_account_from_dict(service_account_path)
-                        sh = gc.open_by_key("1AbgyZpYt-sln4b6Og1ahYw5uuFimL8_6Z5rQHfQYUWI")
+                        sh = gc.open_by_key("IN Credentials.txt")
                         worksheet = sh.worksheet(username)
                         
                         # Get header row to determine the Feedback column index; add it if missing
