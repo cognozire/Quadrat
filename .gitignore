@@ -1,2 +1,5 @@
 .devcontainer
 credentials.txt
+.env
+Feeback_Api's/*.json
+Feeback_Api's/.env
