@@ -26,8 +26,7 @@ model = genai.GenerativeModel("gemini-2.0-flash")
 import firebase_admin
 from firebase_admin import credentials
 
-# cred = credentials.Certificate("/content/ir-502e5-firebase-adminsdk-3der0-0145a61d7a.json")
-# firebase_admin.initialize_app(cred)
+
 
 app = FastAPI()
 
